@@ -164,8 +164,6 @@ npm run dev                   # http://localhost:3000
 - **use the Firestore project:** set `GOOGLE_CLOUD_PROJECT` and `FIREBASE_STORAGE_BUCKET` in `.env` and sign in with `gcloud auth application-default login` (needs access to the project), or
 - **build your own library:** open *Content library (admin)* on the login screen and upload a textbook PDF (allowed from `localhost` without `ADMIN_TOKEN`; uses many Gemini calls).
 
-The hand-written guided lessons in `src/guided/` are in the repository.
-
 `npm run seed:g4 -- --reset` creates Maya and Leo, but it needs the Cambridge Grade 4 Mathematics course (`cambridge-lower-secondary--g4--mathematics`) in the library first.
 
 ### Tests
@@ -181,7 +179,8 @@ npm run test:gates            # content quality gates, board pictures, curriculu
 npm run test:eval             # EV-01 scoring code
 ```
 
-`npm run eval:diagnosis` re-runs EV-01 against the real model (needs `GEMINI_API_KEY`). `npm test` includes `tests/live/run.mjs`, which has **7 known failing assertions** against an older snapshot of the voice path.
+`npm run eval:diagnosis` re-runs EV-01 against the real model (needs `GEMINI_API_KEY`). `npm test` includes `tests/live/run.mjs`
+
 
 ### Deploy
 
@@ -208,30 +207,5 @@ Things to try saying:
 
 **Known limits:** spaced review is not scheduled for live learners yet (mastery reaches "provisional", not "durable"); `DEMO_MODE` lets anyone with the link see every learner, so the deployment must hold demo data only; Maya and Leo are simulated, not real children.
 
----
-
-## Repository layout
-
-| Path | What it is |
-|---|---|
-| `server.ts`, `server/` | Express API, Gemini Live WebSocket relay, auth/admin middleware, text-tutor route |
-| `src/adaptive/` | Learner model: reasoning assessor, live observer, BKT, ladder, strategy profile, Profiler, claim validator, repositories (file / Firestore) |
-| `src/plan/` | Deterministic plan compiler, in-lesson plan delta, prompt rendering |
-| `src/persona/` | The single tutor persona, composed into the system instruction |
-| `src/guided/` | Guided chalkboard tutor and its hand-written lessons |
-| `src/curriculum/` | PDF ingestion, course structure, lesson / photo generation, pre-generation store |
-| `src/visual/`, `src/quality/` | Board-picture vocabulary and renderer; quality lints and the review call |
-| `src/parent/` | Parent View report |
-| `src/ai/gateway.ts` | Single model gateway: model resolution, timeouts, fallback, logging |
-| `evals/diagnosis/` | EV-01 cases, runner, metrics and recorded results |
-| `tests/` | Offline test suites |
-| `scripts/` | Deploy, migration, seeding, pre-generation, verification |
-| `functions/` | Legacy Cloud Functions API — **not deployed or used** |
-
-**Not in the repository (gitignored):** `data/` (courses, lessons, learners), `.env*` and service-account keys, `docs/` (design documents, diagrams, submission decks, internal notes), `PROJECT_STATE.md` / `DECISIONS.md` (internal logs), videos, `logs/`, `backups/`, `parked/`, build output.
-
----
-
-## License
 
 No open-source licence has been granted; all rights reserved. Built for the [Google Cloud AI Builder Cup 2026](https://aibuildercup.com/).
