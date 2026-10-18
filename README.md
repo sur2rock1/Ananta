@@ -196,11 +196,7 @@ Required variables and steps are documented at the top of `scripts/deploy-cloudr
 
 ## For evaluators
 
-1. Open **[https://ananta-ivczdbgbja-as.a.run.app/](https://ananta-ivczdbgbja-as.a.run.app/)** — no account needed (`DEMO_MODE=true`).
-2. Pick **Maya (Simulated)** or **Leo (Simulated)**.
-3. Choose **Mathematics → Money and decimal place value** and start the lesson.
-4. Compare the openings: Maya is shown a place-value picture first; Leo starts with a worked example and no picture.
-5. Allow the microphone and talk to the tutor.
+Cloud URL and other details are in ppt 
 
 Things to try saying:
 
